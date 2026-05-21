@@ -1,0 +1,25 @@
+{
+  "id": "intro",
+  "title": "Introduction",
+  "description": "Welcome to Keep Track — a personal budgeting app built for individuals who want to be intentional about their money.",
+  "source": "@site/docs/intro.md",
+  "sourceDirName": ".",
+  "slug": "/intro",
+  "permalink": "/docs/intro",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/Khesir/KeepTrack/tree/main/landing/docs/intro.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "id": "intro",
+    "sidebar_position": 1,
+    "title": "Introduction"
+  },
+  "sidebar": "docs",
+  "next": {
+    "title": "Installation",
+    "permalink": "/docs/installation"
+  }
+}

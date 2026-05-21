@@ -1,0 +1,52 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/docs",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/docs",
+          "mainDocId": "index",
+          "docs": [
+            {
+              "id": "changelog",
+              "path": "/docs/changelog",
+              "sidebar": "docs"
+            },
+            {
+              "id": "index",
+              "path": "/docs/"
+            },
+            {
+              "id": "installation",
+              "path": "/docs/installation",
+              "sidebar": "docs"
+            },
+            {
+              "id": "intro",
+              "path": "/docs/intro",
+              "sidebar": "docs"
+            },
+            {
+              "id": "quickstart",
+              "path": "/docs/quickstart",
+              "sidebar": "docs"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "docs": {
+              "link": {
+                "path": "/docs/intro",
+                "label": "intro"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

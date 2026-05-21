@@ -1,3 +1,9 @@
+---
+id: changelog
+sidebar_position: 4
+title: Changelog
+---
+
 # Changelog
 
 All notable changes to Keep Track will be documented in this page.

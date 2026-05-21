@@ -1,82 +1,78 @@
+---
+id: installation
+sidebar_position: 2
+title: Installation
+---
+
 # Installation
 
-This guide will help you install Keep Track on your system.
+Keep Track is available on Android, iOS, Windows, and macOS.
 
-## Quick Install
+## Android
 
-The easiest way to get started is to download the installer for your platform from our [Download page](/download).
+**Minimum:** Android 8.0 (Oreo) · 2 GB RAM · 200 MB storage
 
-## Platform-Specific Instructions
+1. Go to the [Download page](/download) and grab the `.apk` file
+2. On your device, enable installing from unknown sources:  
+   **Settings → Apps → Special app access → Install unknown apps → allow your browser**
+3. Tap the downloaded `.apk` file
+4. Follow the on-screen prompts and tap **Install**
+5. Open **Keep Track** from your app drawer
 
-### Windows
+## iOS
 
-1. Download the Windows installer (`.exe`) from the [Download page](/download)
-2. Double-click the downloaded file to run the installer
-3. Follow the installation wizard
-4. Launch Keep Track from the Start Menu or Desktop shortcut
+**Minimum:** iOS 14.0 · iPhone 6s or newer · 200 MB storage
 
-**Note**: You may see a Windows SmartScreen warning on first launch. This is normal for new applications. Click "More info" and then "Run anyway" to proceed.
+Coming to the App Store — stay tuned for the release announcement.
 
-### Android
+## Windows
 
-1. Download the APK file (`.apk`) from the [Download page](/download)
-2. Open the downloaded APK file on your Android device
-3. If prompted, allow installation from unknown sources:
-   - Go to Settings → Security
-   - Enable "Unknown sources" or "Install unknown apps"
-4. Tap **Install** to complete the installation
-5. Open Keep Track from your app drawer
+**Minimum:** Windows 10 64-bit · 4 GB RAM · 500 MB storage
 
-**Note**: You may need to allow installation from your browser or file manager. This is a standard security measure for apps not from the Google Play Store.
+1. Go to the [Download page](/download) and grab the `.exe` installer
+2. Run the file
+3. If **Windows SmartScreen** blocks it, click **More info → Run anyway**
+4. Follow the setup wizard and complete installation
+5. Launch **Keep Track** from the Start Menu or the desktop shortcut
+
+## macOS
+
+**Minimum:** macOS 12 Monterey · Apple Silicon or Intel · 500 MB storage
+
+1. Go to the [Download page](/download) and grab the `.dmg` file
+2. Open the disk image
+3. Drag **Keep Track** into your **Applications** folder
+4. On first launch, **right-click → Open** (required to bypass Gatekeeper on first run)
+5. Sign in or create your account
+
+---
 
 ## First Time Setup
 
-After installing and launching Keep Track for the first time:
+Regardless of platform, the first steps are the same:
 
-1. **Authentication**
-   - Create a new account or sign in
-   - You can use email/password or Google authentication
+1. **Sign in or create an account** — email/password or Google OAuth
+2. **Set your currency** — Settings → Currency
+3. **Create your first budget** — Budget tab → current month → Add Budget Group
+4. **Start tracking** — log your first transaction with the + button
 
-2. **Initial Configuration**
-   - Set your preferred currency in Settings
-   - Choose your theme (Light/Dark/System)
+→ [Quick Start guide](/docs/quickstart)
 
-3. **Start Exploring**
-   - Add your financial accounts
-   - Create your first budget
-   - Record a transaction
-
-## System Requirements
-
-Make sure your system meets these minimum requirements:
-
-### Windows
-- **RAM**: 4 GB (8 GB recommended)
-- **Storage**: 500 MB available space
-- **Internet**: Required for cloud sync and authentication
-
-### Android
-- **RAM**: 2 GB (4 GB recommended)
-- **Storage**: 200 MB available space
-- **Internet**: Required for cloud sync and authentication
+---
 
 ## Troubleshooting
 
-### Application won't launch
+**App won't open on Windows**  
+Make sure you're on Windows 10 (64-bit) or later. Try right-clicking the shortcut and selecting **Run as administrator**.
 
-**Windows**: Try running as administrator
-**Android**: Make sure you have enough storage space and your Android version meets the minimum requirements
+**SmartScreen blocks the installer**  
+This appears because the app is distributed outside the Microsoft Store. Click **More info → Run anyway** — the app is safe.
 
-### Can't sign in
+**macOS says the app is from an unidentified developer**  
+Right-click the app icon and choose **Open**, then confirm in the dialog. You only need to do this once.
 
-- Check your internet connection
-- Verify your email and password
-- Try resetting your password if needed
+**Can't install the APK on Android**  
+Make sure you've enabled installation from unknown sources for the app you're using to open the file (browser or file manager). See step 2 in the Android section above.
 
-### Missing features
-
-Make sure you're running the latest version. Check the [Download page](/download) for updates.
-
-## Next Steps
-
-Now that you have Keep Track installed, check out the [Quick Start Guide](./quickstart) to learn the basics!
+**Sync not working**  
+Check your internet connection. Keep Track works offline and syncs when connectivity is restored — no manual action needed.

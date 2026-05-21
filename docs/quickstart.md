@@ -1,69 +1,79 @@
-# Quick Start Guide
+---
+id: quickstart
+sidebar_position: 3
+title: Quick Start
+---
 
-Get up and running with Keep Track in minutes!
+# Quick Start
 
-## 1. Add Your First Account
+Get up and running with Keep Track in a few minutes.
 
-1. Go to **Finance** → **Accounts** tab
-2. Tap the **+** button
-3. Fill in the details:
-   - Name (e.g., "Main Bank Account")
-   - Type (Bank, Cash, E-Wallet, Credit Card, etc.)
-   - Starting balance
-4. Tap **Save**
+## 1. Create Your Account
 
-Your account balance will update automatically with every transaction.
+Open the app and sign up with your email address or continue with Google. Your data syncs to the cloud so it's available across all your devices.
 
-## 2. Set Up a Budget
+## 2. Set Your Currency
 
-1. Go to **Finance** → **Budget** tab
-2. Tap **Start Planning** for the current month
-3. Create a budget group (e.g., "Monthly Expenses")
-4. Add categories (Food, Transport, Utilities, etc.) with target amounts
-5. Repeat for an income group if needed
+Go to **Settings → Currency** and select your local currency. This applies everywhere in the app — budgets, transactions, goals, and savings.
 
-The budget screen shows your actual spending vs. planned in real time.
+## 3. Plan Your First Month
 
-## 3. Record a Transaction
+Head to the **Budget** tab and tap the current month.
 
-1. Tap the **New Transaction** button (bottom right)
-2. Choose the type: **Income**, **Expense**, or **Transfer**
-3. Enter the amount
-4. Select the account and category
-5. Optionally add a description, date, and fee
-6. Tap **Create Transaction**
+- Tap **Add Budget Group** to create an income group (e.g. "May Income")
+- Add categories inside it — Salary, Freelance — with your expected amounts
+- Create a second group for expenses (e.g. "May Expenses")
+- Add categories — Rent, Food, Transport, Entertainment — with planned amounts
 
-Your account balance and budget progress update immediately.
+Your budget is now set. As you log transactions, the actuals will fill in automatically.
 
-## 4. Track Debts & Receivables
+## 4. Log a Transaction
 
-1. Go to **Finance** → **Debts** tab
-2. Tap **+** to add a debt or receivable
-3. Fill in the person's name, total amount, and payment schedule
-4. When making a payment, tap **Pay** and select the account to deduct from
+Tap the **+** button anywhere in the app.
 
-## 5. Set a Savings Goal
+- Choose **Income** or **Expense**
+- Enter the amount and description
+- Assign a category (links it to your budget)
+- Save — it appears in your transaction history and updates your budget actuals
 
-1. Go to **Finance** → **Goals** tab
-2. Tap **+** to create a goal
-3. Enter a name, target amount, and deadline
-4. Contribute from any account whenever you like
+## 5. Set Up Your Savings Wallets
 
-## 6. Schedule Recurring Payments
+Go to the **Savings** tab and tap **New Bucket**.
 
-1. Go to **Finance** → **Planned Payments** tab
-2. Tap **+** to add a recurring bill (rent, subscription, etc.)
-3. Set the amount, frequency, and linked account
-4. Mark it paid each period to keep your budget accurate
+- Name it something meaningful — Emergency Fund, Travel, Laptop
+- Give it a color and icon
+- Set the starting balance if you already have money set aside
+- Tap a bucket anytime to deposit or withdraw
+
+## 6. Add a Goal
+
+In the **Budget** view, open the **Goals** section and tap **Add Goal**.
+
+- Set a name, target amount, and target date
+- Add a monthly contribution amount
+- Track progress as you contribute each month
+
+## 7. Track What You Owe and Are Owed
+
+Open the **Debts** section from the Budget view.
+
+- Add a debt (money you owe) — loan amount, who to, due date, monthly payment
+- Add a receivable (money owed to you) — who, how much, when
+- Log payments over time and watch the remaining balance decrease
+
+## 8. Add Your Subscriptions
+
+In the **Subs** section, tap to add your recurring subscriptions.
+
+- Name, provider, amount, billing cycle
+- The app shows your next billing date and total monthly spend across all subs
 
 ## Tips
 
-- Use **Settings** to change your currency and theme
-- All data syncs automatically across your devices when signed in
-- Tap any account to see its full transaction history
+- **Budget Profiles** — if you have freelance income alongside your salary, create a separate profile to keep them independent
+- **Planned Payments** — add recurring bills (electricity, internet) so you can anticipate cash flow before the due date hits
+- **Transaction Planner** — schedule expected future transactions (incoming salary, a known one-off expense) to plan ahead
 
-## Need Help?
+---
 
-- 📚 [Full Documentation](./index)
-- 💬 [GitHub Discussions](https://github.com/Khesir/KeepTrack/discussions)
-- 🐛 [Report Issues](https://github.com/Khesir/KeepTrack/issues)
+Need more detail? See the [Introduction](/docs/) or check the [Installation guide](/docs/installation).

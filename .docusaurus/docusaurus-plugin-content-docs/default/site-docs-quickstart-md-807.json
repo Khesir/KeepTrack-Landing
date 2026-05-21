@@ -1,0 +1,29 @@
+{
+  "id": "quickstart",
+  "title": "Quick Start",
+  "description": "Get up and running with Keep Track in a few minutes.",
+  "source": "@site/docs/quickstart.md",
+  "sourceDirName": ".",
+  "slug": "/quickstart",
+  "permalink": "/docs/quickstart",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/Khesir/KeepTrack/tree/main/landing/docs/quickstart.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "id": "quickstart",
+    "sidebar_position": 3,
+    "title": "Quick Start"
+  },
+  "sidebar": "docs",
+  "previous": {
+    "title": "Installation",
+    "permalink": "/docs/installation"
+  },
+  "next": {
+    "title": "Changelog",
+    "permalink": "/docs/changelog"
+  }
+}

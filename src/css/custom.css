@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+/* ── Brand tokens ───────────────────────────────────────────────────────────── */
+:root {
+  --ifm-color-primary: #6366f1;
+  --ifm-color-primary-dark: #4f52ef;
+  --ifm-color-primary-darker: #4346ee;
+  --ifm-color-primary-darkest: #1d21e9;
+  --ifm-color-primary-light: #7779f3;
+  --ifm-color-primary-lighter: #8385f4;
+  --ifm-color-primary-lightest: #abacf8;
+
+  --ifm-font-family-base: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --ifm-font-family-monospace: 'DM Mono', 'Fira Code', monospace;
+  --ifm-code-font-size: 90%;
+  --ifm-navbar-height: 60px;
+
+  --kt-brand: #6366f1;
+  --kt-brand-light: #818cf8;
+  --kt-success: #22c55e;
+  --kt-warm-white: #f1efe8;
+}
+
+[data-theme='dark'] {
+  --ifm-background-color: #0a0a09;
+  --ifm-background-surface-color: #141412;
+  --ifm-navbar-background-color: rgba(10, 10, 9, 0.85);
+  --ifm-footer-background-color: #0f0f0e;
+  --ifm-color-emphasis-300: rgba(255, 255, 255, 0.08);
+
+  --kt-card-bg: #1a1a18;
+  --kt-border: rgba(255, 255, 255, 0.08);
+  --kt-text-secondary: rgba(241, 239, 232, 0.55);
+}
+
+[data-theme='light'] {
+  --ifm-background-color: #fafaf8;
+  --ifm-background-surface-color: #ffffff;
+  --ifm-navbar-background-color: rgba(250, 250, 248, 0.9);
+
+  --kt-card-bg: #ffffff;
+  --kt-border: rgba(0, 0, 0, 0.07);
+  --kt-text-secondary: rgba(20, 20, 18, 0.55);
+}
+
+/* ── Global ─────────────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Navbar ─────────────────────────────────────────────────────────────────── */
+.navbar {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--kt-border);
+  box-shadow: none;
+}
+
+.navbar__title {
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────────── */
+.footer {
+  border-top: 1px solid var(--kt-border);
+}
+
+/* ── Doc sidebar ────────────────────────────────────────────────────────────── */
+.theme-doc-sidebar-container {
+  border-right: 1px solid var(--kt-border) !important;
+}
+
+/* ── Docs content ───────────────────────────────────────────────────────────── */
+.markdown h1 { letter-spacing: -0.5px; }
+.markdown h2 { letter-spacing: -0.3px; }

@@ -1,3 +1,9 @@
+---
+id: intro
+sidebar_position: 1
+title: Introduction
+---
+
 # Introduction
 
 Welcome to **Keep Track** — a personal budgeting app built for individuals who want to be intentional about their money.
@@ -37,17 +43,17 @@ Schedule expected future transactions — an incoming invoice, a one-off payment
 ## Supported Platforms
 
 | Platform | Minimum Version |
-|----------|----------------|
-| Android  | 8.0 (Oreo)     |
-| iOS      | 14.0           |
-| Windows  | 10 (64-bit)    |
-| macOS    | 12 Monterey    |
+|----------|-----------------|
+| Android  | 8.0 (Oreo)      |
+| iOS      | 14.0            |
+| Windows  | 10 (64-bit)     |
+| macOS    | 12 Monterey     |
 
 ## Tech Stack
 
-Keep Track is built with Flutter (frontend), NestJS (backend), and MongoDB (database). Data syncs to the cloud when you're online and works offline via local cache.
+Keep Track is built with Flutter (frontend), NestJS (backend), and MongoDB (database). Data syncs to the cloud when online and works offline via local cache.
 
 ## Getting Started
 
-→ [Installation](/docs/installation)  
-→ [Quick Start](/docs/quickstart)
+→ [Installation](./installation)  
+→ [Quick Start](./quickstart)

@@ -2,82 +2,170 @@
 layout: home
 
 hero:
-  name: Keep Track
-  tagline: Your personal finance companion
-  text: Take control of your money — track expenses, manage budgets, and reach your financial goals.
+  name: "Keep Track"
+  text: "Your personal money, planned."
+  tagline: "Budget every month, save with purpose, and stay on top of what you owe — all in one place."
   image:
-    src: /app_icon.png
-    alt: Keep Track App
+    src: /app-icon.svg
+    alt: Keep Track
   actions:
     - theme: brand
       text: Download Now
       link: /download
     - theme: alt
-      text: View on GitHub
-      link: https://github.com/Khesir/KeepTrack
+      text: See What's Inside
+      link: /docs/
 
 features:
-  - icon: 💰
-    title: Account Management
-    details: Keep all your bank accounts, wallets, and cash in one place. Get a clear picture of your total balance at a glance.
-
   - icon: 📊
-    title: Budget Tracking
-    details: Set monthly budgets per category and see exactly where your money goes. Stay within limits and adjust spending habits with ease.
+    title: Monthly Budgets
+    details: Plan your income and expenses before the month begins. Group categories your way — housing, food, transport — and watch actuals fill in as you spend.
 
-  - icon: 🧾
-    title: Transaction History
-    details: Log every income and expense with full details. Filter, search, and review your complete financial history anytime.
+  - icon: 💸
+    title: Inflow & Outflow
+    details: Track every peso in and out. Log salary, freelance income, and everyday expenses against your budget so nothing slips through the cracks.
+
+  - icon: 🪣
+    title: Savings Wallets
+    details: Create named buckets for the things that matter — emergency fund, travel, a new laptop. Deposit, withdraw, and see a full history per wallet.
 
   - icon: 🎯
     title: Financial Goals
-    details: Define savings goals and track your progress over time. Whether it's an emergency fund or a big purchase, stay on target.
+    details: Set a target amount and a deadline. Track your monthly contribution progress toward big purchases, trips, or milestones you're working toward.
 
   - icon: 💳
-    title: Debt Management
-    details: Track what you owe and what others owe you. Monitor repayment progress and never lose track of outstanding debts.
+    title: Debts & Receivables
+    details: Know exactly what you owe and what others owe you. Record loans, track repayments, and see your obligations in both directions at a glance.
+
+  - icon: 🔁
+    title: Subscriptions
+    details: See all your recurring subscriptions in one list — streaming, tools, gym — with next billing dates and monthly cost equivalents so you know what's auto-charging.
 
   - icon: 📅
     title: Planned Payments
-    details: Schedule recurring bills and upcoming payments in advance. Get a clear view of future cash flow before it hits your account.
+    details: Schedule upcoming bills before they arrive. Electricity, internet, insurance — set the frequency and never be caught off guard.
+
+  - icon: 🗂️
+    title: Budget Profiles
+    details: Run separate budget plans side by side. Keep your personal finances and freelance income in their own spaces without mixing them up.
 
   - icon: 🌙
-    title: Dark Mode
-    details: Easy on the eyes with full dark mode support. Switch between light and dark themes seamlessly across all screens.
-
-  - icon: 💻
-    title: Cross-Platform
-    details: Available for Windows and Android. One app, consistent experience across desktop and mobile.
-
-  - icon: 🔒
-    title: Secure & Private
-    details: Your financial data is protected with JWT authentication and secure cloud sync. Access your data from anywhere, anytime.
+    title: Light & Dark Mode
+    details: Fully themed for both environments. Follows your system preference or switch manually from settings anytime.
 ---
 
-## Why Keep Track?
+<div class="custom-section">
 
-Keep Track is built for people who want a straightforward, no-nonsense way to manage their personal finances. No subscriptions, no ads — just a clean app that helps you understand and control your money.
+## Built for people who take their money seriously
 
-### 🎯 Key Highlights
+Keep Track is not just an expense tracker. It's a full monthly budgeting system built for individuals who want to plan their money before they spend it — not just record what happened after.
 
-- **Account Overview**: See all your accounts and total balance in one dashboard.
-- **Smart Budgets**: Create category budgets and track spending against them each month.
-- **Full Transaction Log**: Every peso tracked, searchable, and categorized.
-- **Debt Tracker**: Stay on top of loans and IOUs with progress tracking.
-- **Goal Setting**: Set financial targets and watch your savings grow.
-- **Planned Payments**: Never be caught off guard by a bill again.
-- **Cloud Sync**: Your data safely stored and accessible across all your devices.
+Whether you're on a salary, managing freelance income, paying off a loan, or saving toward something big — Keep Track gives you the structure to stay in control every month.
 
-## Ready to Get Started?
+### Who it's for
 
-Download Keep Track and start taking control of your finances today.
+- **Young professionals** allocating a monthly paycheck across rent, food, transport, and goals
+- **Freelancers** who need to separate personal finances from side-income cash flow  
+- **Anyone** juggling subscriptions, loans, or recurring bills they want to stay ahead of
+
+### What makes it different
+
+Most budgeting apps track the past. Keep Track lets you **plan the month ahead** — set your income, allocate every peso to a category, and watch actuals fill in as you go. It's the envelope method, without the envelopes.
+
+</div>
+
+<div class="platform-section">
+
+## Available on Android, iOS, Windows & macOS
+
+<div class="platform-grid">
+  <div class="platform-card">
+    <div class="platform-icon">🤖</div>
+    <div class="platform-name">Android</div>
+    <div class="platform-sub">8.0 and above</div>
+  </div>
+  <div class="platform-card">
+    <div class="platform-icon">🍎</div>
+    <div class="platform-name">iOS</div>
+    <div class="platform-sub">14 and above</div>
+  </div>
+  <div class="platform-card">
+    <div class="platform-icon">🪟</div>
+    <div class="platform-name">Windows</div>
+    <div class="platform-sub">Windows 10+</div>
+  </div>
+  <div class="platform-card">
+    <div class="platform-icon">🍏</div>
+    <div class="platform-name">macOS</div>
+    <div class="platform-sub">Monterey and above</div>
+  </div>
+</div>
+
+</div>
+
+<div class="cta-section">
+
+## Ready to take control?
 
 <DownloadButtons />
 
----
-
-<div style="text-align: center; margin: 64px 0;">
-  <p style="font-size: 18px; color: var(--vp-c-text-2);">
-    Made with ❤️ using Flutter
-  </p>
 </div>
+
+<style>
+.custom-section {
+  max-width: 800px;
+  margin: 64px auto 0;
+  padding: 0 24px;
+}
+.custom-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.custom-section h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 32px 0 12px;
+}
+.platform-section {
+  max-width: 800px;
+  margin: 64px auto 0;
+  padding: 0 24px;
+  text-align: center;
+}
+.platform-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 560px;
+  margin: 0 auto;
+}
+@media (max-width: 600px) {
+  .platform-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.platform-card {
+  padding: 20px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+}
+.platform-icon { font-size: 28px; margin-bottom: 8px; }
+.platform-name { font-weight: 600; font-size: 14px; }
+.platform-sub { font-size: 12px; color: var(--vp-c-text-2); margin-top: 4px; }
+.cta-section {
+  max-width: 800px;
+  margin: 64px auto 80px;
+  padding: 0 24px;
+  text-align: center;
+}
+.cta-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+</style>

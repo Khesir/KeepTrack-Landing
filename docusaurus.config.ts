@@ -80,6 +80,7 @@ const config: Config = {
           items: [
             { label: 'Terms of Service', to: '/terms' },
             { label: 'Privacy Policy', to: '/privacy' },
+            { label: 'Security', to: '/security' },
           ],
         },
       ],

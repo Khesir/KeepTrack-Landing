@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '@theme/Layout';
 import styles from './legal.module.css';
 
-const LAST_UPDATED = 'May 21, 2026';
+const LAST_UPDATED = 'May 31, 2026';
 
 export default function Privacy(): React.ReactElement {
   return (
@@ -107,14 +107,40 @@ export default function Privacy(): React.ReactElement {
               has provided us with personal information, please contact us to have it removed.
             </p>
 
-            <h2>8. Changes to This Policy</h2>
+            <h2>8. Backup & Encryption</h2>
+            <p>
+              The App includes an optional backup feature that allows you to export your data
+              to a local file or sync it to our servers. All backups are{' '}
+              <strong>encrypted on your device before they leave it</strong>, using AES-256
+              encryption with a password you choose.
+            </p>
+            <ul>
+              <li>
+                <strong>Your backup password is never sent to our servers.</strong> The
+                encryption key is derived entirely on your device from the password you provide.
+              </li>
+              <li>
+                When you use Cloud Sync, our servers store only the encrypted ciphertext. We
+                cannot read, access, or recover the contents of your backup.
+              </li>
+              <li>
+                If you lose your backup password, the backup <strong>cannot be recovered by
+                anyone</strong>, including us. There is no password reset for backup files.
+              </li>
+            </ul>
+            <p>
+              For a full technical explanation, see our{' '}
+              <a href="/security">Security & Data Ownership</a> page.
+            </p>
+
+            <h2>9. Changes to This Policy</h2>
             <p>
               We may update this Privacy Policy from time to time. We will notify you of
               significant changes by updating the date at the top of this page. Continued
               use of the App after changes constitutes acceptance of the updated policy.
             </p>
 
-            <h2>9. Contact</h2>
+            <h2>10. Contact</h2>
             <p>
               If you have questions or concerns about this Privacy Policy or your data,
               please contact us at{' '}

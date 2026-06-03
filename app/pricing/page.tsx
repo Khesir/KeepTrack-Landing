@@ -61,37 +61,14 @@ export default function PricingPage() {
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-violet/20 border border-violet/30 rounded-full text-violet-light text-xs font-semibold mb-5">
                   Keep Track Plus
                 </div>
-                <h2 className="text-xl font-semibold text-snow mb-2">Get started with Plus</h2>
+                <h2 className="text-xl font-semibold text-snow mb-2">Keep Track Plus</h2>
                 <p className="text-snow/45 text-sm mb-6 leading-relaxed">
-                  Enter your account email — the one you use in the Keep Track app.
-                  You'll be redirected to Stripe to complete your subscription.
+                  Plus is coming soon. Cloud sync, AI features, and more — stay tuned.
                 </p>
 
-                <form onSubmit={handleCheckout} className="flex flex-col gap-3">
-                  <div>
-                    <input
-                      type="email"
-                      placeholder="your@email.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-3 bg-white/8 border border-white/15 text-snow placeholder-snow/30 rounded-xl text-sm focus:outline-none focus:border-violet/60 focus:bg-white/10 transition-colors"
-                    />
-                    {error && (
-                      <p className="text-error text-xs mt-2">{error}</p>
-                    )}
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="px-6 py-3 bg-violet text-white font-semibold text-sm rounded-xl hover:bg-violet-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-lg hover:shadow-violet/30"
-                  >
-                    {loading ? 'Redirecting…' : 'Continue to Payment →'}
-                  </button>
-                </form>
-
-                <p className="text-snow/25 text-xs mt-4 text-center">
-                  Secured by Stripe · Cancel anytime · No lock-in
-                </p>
+                <div className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-center">
+                  <span className="text-snow/40 text-sm font-medium">Coming Soon</span>
+                </div>
               </div>
             </div>
           </div>

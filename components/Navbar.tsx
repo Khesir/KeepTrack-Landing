@@ -7,8 +7,7 @@ import { useEffect, useState } from 'react';
 const NAV_LINKS = [
   { label: 'Features', href: '/#features' },
   { label: 'Pricing', href: '/pricing' },
-  { label: 'Roadmap', href: '/roadmap' },
-  { label: 'Changelog', href: '/changelog' },
+  { label: 'Announcements', href: '/announcements' },
   { label: 'Support', href: '/support' },
   { label: 'Download', href: '/download' },
 ];
@@ -70,12 +69,9 @@ export default function Navbar() {
           >
             Download Free
           </Link>
-          <Link
-            href="/pricing"
-            className="px-4 py-2 bg-violet text-white text-sm font-medium rounded-lg hover:bg-violet-dark transition-colors"
-          >
-            Get Plus
-          </Link>
+          <span className="px-4 py-2 bg-violet/20 text-violet/60 text-sm font-medium rounded-lg cursor-not-allowed select-none">
+            Plus — Coming Soon
+          </span>
         </div>
 
         <button
@@ -114,13 +110,9 @@ export default function Navbar() {
               >
                 Download Free
               </Link>
-              <Link
-                href="/pricing"
-                onClick={() => setMenuOpen(false)}
-                className="px-4 py-2.5 text-sm font-medium bg-violet text-white rounded-lg text-center hover:bg-violet-dark transition-colors"
-              >
-                Get Plus — ₱99/mo
-              </Link>
+              <span className="px-4 py-2.5 text-sm font-medium bg-violet/15 text-violet/50 rounded-lg text-center cursor-not-allowed select-none">
+                Plus — Coming Soon
+              </span>
             </div>
           </div>
         </div>

@@ -69,7 +69,7 @@ export default function TermsPage() {
             </Section>
 
             <Section title="Changes to These Terms">
-              We may update these terms from time to time. Continued use of Keep Track after changes constitutes acceptance of the updated terms. Material changes will be announced via the <a href="/changelog" className="text-violet hover:underline">changelog</a>.
+              We may update these terms from time to time. Continued use of Keep Track after changes constitutes acceptance of the updated terms. Material changes will be announced via the <a href="/announcements" className="text-violet hover:underline">announcements</a>.
             </Section>
 
             <Section title="Contact">

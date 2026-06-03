@@ -4,8 +4,7 @@ import { KofiIcon } from './Icons';
 const LINKS = [
   { label: 'Features', href: '/#features' },
   { label: 'Pricing', href: '/pricing' },
-  { label: 'Roadmap', href: '/roadmap' },
-  { label: 'Changelog', href: '/changelog' },
+  { label: 'Announcements', href: '/announcements' },
   { label: 'Support', href: '/support' },
   { label: 'Download', href: '/download' },
 ];

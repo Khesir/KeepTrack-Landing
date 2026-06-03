@@ -1,8 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND_URL;
+const MAX_IMAGES = 5;
+const MAX_SIZE_MB = 5;
 
 const TICKET_TYPES = [
   { value: 'bug', label: 'Bug Report', desc: 'Something is broken or not working as expected.' },
@@ -13,16 +17,42 @@ const TICKET_TYPES = [
 
 type Field = 'name' | 'email' | 'subject' | 'message' | 'type';
 
+type ImageFile = { file: File; preview: string };
+
 export default function SupportPage() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '', type: 'bug' });
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
+  const [images, setImages] = useState<ImageFile[]>([]);
+  const [imageError, setImageError] = useState('');
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [serverError, setServerError] = useState('');
+  const fileRef = useRef<HTMLInputElement>(null);
 
   const set = (field: Field, value: string) => {
     setForm((f) => ({ ...f, [field]: value }));
     setErrors((e) => ({ ...e, [field]: undefined }));
+  };
+
+  const addImages = (files: FileList | null) => {
+    if (!files) return;
+    setImageError('');
+    const incoming = Array.from(files);
+    const valid: ImageFile[] = [];
+    for (const file of incoming) {
+      if (!file.type.startsWith('image/')) { setImageError('Only image files are allowed.'); continue; }
+      if (file.size > MAX_SIZE_MB * 1024 * 1024) { setImageError(`Max file size is ${MAX_SIZE_MB}MB.`); continue; }
+      if (images.length + valid.length >= MAX_IMAGES) { setImageError(`Max ${MAX_IMAGES} images.`); break; }
+      valid.push({ file, preview: URL.createObjectURL(file) });
+    }
+    setImages((prev) => [...prev, ...valid]);
+  };
+
+  const removeImage = (i: number) => {
+    setImages((prev) => {
+      URL.revokeObjectURL(prev[i].preview);
+      return prev.filter((_, idx) => idx !== i);
+    });
   };
 
   const validate = (): boolean => {
@@ -43,10 +73,21 @@ export default function SupportPage() {
     setLoading(true);
     setServerError('');
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/support`, {
+      // Upload images first
+      const imageUrls: string[] = [];
+      for (const { file } of images) {
+        const fd = new FormData();
+        fd.append('file', file);
+        const r = await fetch(`${BACKEND}/api/v1/support/upload`, { method: 'POST', body: fd });
+        if (!r.ok) throw new Error('Image upload failed.');
+        const data = await r.json();
+        imageUrls.push(data.url);
+      }
+
+      const res = await fetch(`${BACKEND}/api/v1/support`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, imageUrls }),
       });
       if (!res.ok) {
         const data = await res.json();
@@ -87,7 +128,7 @@ export default function SupportPage() {
                 Thanks for reaching out. I'll review your message and get back to you at <span className="text-midnight font-medium">{form.email}</span>.
               </p>
               <button
-                onClick={() => { setSubmitted(false); setForm({ name: '', email: '', subject: '', message: '', type: 'bug' }); }}
+                onClick={() => { setSubmitted(false); setForm({ name: '', email: '', subject: '', message: '', type: 'bug' }); setImages([]); }}
                 className="mt-6 px-5 py-2.5 border border-ash text-midnight text-sm font-medium rounded-xl hover:bg-snow-2 transition-colors"
               >
                 Send another message
@@ -96,79 +137,68 @@ export default function SupportPage() {
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <Field label="Name" error={errors.name}>
-                  <input
-                    type="text"
-                    placeholder="Your name"
-                    value={form.name}
-                    onChange={(e) => set('name', e.target.value)}
-                    className={inputCls(!!errors.name)}
-                  />
-                </Field>
-                <Field label="Email" error={errors.email}>
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    value={form.email}
-                    onChange={(e) => set('email', e.target.value)}
-                    className={inputCls(!!errors.email)}
-                  />
-                </Field>
+                <FormField label="Name" error={errors.name}>
+                  <input type="text" placeholder="Your name" value={form.name} onChange={(e) => set('name', e.target.value)} className={inputCls(!!errors.name)} />
+                </FormField>
+                <FormField label="Email" error={errors.email}>
+                  <input type="email" placeholder="your@email.com" value={form.email} onChange={(e) => set('email', e.target.value)} className={inputCls(!!errors.email)} />
+                </FormField>
               </div>
 
-              <Field label="Type">
+              <FormField label="Type">
                 <div className="grid grid-cols-2 gap-2">
                   {TICKET_TYPES.map((t) => (
-                    <button
-                      key={t.value}
-                      type="button"
-                      onClick={() => set('type', t.value)}
-                      className={`text-left px-4 py-3 rounded-xl border text-sm transition-all duration-150 ${
-                        form.type === t.value
-                          ? 'border-violet bg-violet-light text-midnight'
-                          : 'border-ash bg-surface text-wolf-gray hover:border-ash-light hover:text-midnight'
-                      }`}
-                    >
+                    <button key={t.value} type="button" onClick={() => set('type', t.value)}
+                      className={`text-left px-4 py-3 rounded-xl border text-sm transition-all duration-150 ${form.type === t.value ? 'border-violet bg-violet-light text-midnight' : 'border-ash bg-surface text-wolf-gray hover:border-ash-light hover:text-midnight'}`}>
                       <div className="font-medium text-midnight text-xs mb-0.5">{t.label}</div>
                       <div className="text-wolf-gray text-xs leading-snug">{t.desc}</div>
                     </button>
                   ))}
                 </div>
-              </Field>
+              </FormField>
 
-              <Field label="Subject" error={errors.subject}>
-                <input
-                  type="text"
-                  placeholder="Brief summary of your issue"
-                  value={form.subject}
-                  onChange={(e) => set('subject', e.target.value)}
-                  className={inputCls(!!errors.subject)}
-                />
-              </Field>
+              <FormField label="Subject" error={errors.subject}>
+                <input type="text" placeholder="Brief summary of your issue" value={form.subject} onChange={(e) => set('subject', e.target.value)} className={inputCls(!!errors.subject)} />
+              </FormField>
 
-              <Field label="Message" error={errors.message}>
-                <textarea
-                  placeholder="Describe your issue, question, or idea in detail…"
-                  rows={6}
-                  value={form.message}
-                  onChange={(e) => set('message', e.target.value)}
-                  className={`${inputCls(!!errors.message)} resize-none`}
-                />
-                <span className="text-xs text-wolf-gray mt-1 block text-right">
-                  {form.message.length} / 2000
-                </span>
-              </Field>
+              <FormField label="Message" error={errors.message}>
+                <textarea placeholder="Describe your issue, question, or idea in detail…" rows={6} value={form.message} onChange={(e) => set('message', e.target.value)} className={`${inputCls(!!errors.message)} resize-none`} />
+                <span className="text-xs text-wolf-gray mt-1 block text-right">{form.message.length} / 2000</span>
+              </FormField>
 
-              {serverError && (
-                <p className="text-error text-sm px-1">{serverError}</p>
-              )}
+              {/* Image attachments */}
+              <FormField label={`Attachments (optional · max ${MAX_IMAGES})`}>
+                <input ref={fileRef} type="file" accept="image/*" multiple className="hidden" onChange={(e) => addImages(e.target.files)} />
+                {images.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {images.map((img, i) => (
+                      <div key={i} className="relative group w-20 h-20 rounded-lg overflow-hidden border border-ash">
+                        <img src={img.preview} alt="" className="w-full h-full object-cover" />
+                        <button type="button" onClick={() => removeImage(i)}
+                          className="absolute inset-0 flex items-center justify-center bg-midnight/50 opacity-0 group-hover:opacity-100 transition-opacity text-white text-lg font-bold">
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {images.length < MAX_IMAGES && (
+                  <button type="button" onClick={() => fileRef.current?.click()}
+                    className="flex items-center gap-2 px-4 py-2.5 border border-dashed border-ash rounded-xl text-sm text-wolf-gray hover:border-violet hover:text-violet transition-colors">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Add screenshot
+                  </button>
+                )}
+                {imageError && <p className="text-error text-xs mt-1">{imageError}</p>}
+              </FormField>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="px-6 py-3.5 bg-violet text-white font-semibold text-sm rounded-xl hover:bg-violet-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-lg hover:shadow-violet/25"
-              >
-                {loading ? 'Sending…' : 'Send Message'}
+              {serverError && <p className="text-error text-sm px-1">{serverError}</p>}
+
+              <button type="submit" disabled={loading}
+                className="px-6 py-3.5 bg-violet text-white font-semibold text-sm rounded-xl hover:bg-violet-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:shadow-lg hover:shadow-violet/25">
+                {loading ? (images.length > 0 ? 'Uploading…' : 'Sending…') : 'Send Message'}
               </button>
             </form>
           )}
@@ -176,15 +206,9 @@ export default function SupportPage() {
           <div className="mt-14 pt-10 border-t border-ash">
             <h3 className="text-sm font-semibold text-midnight mb-4">Before you write</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {[
-                { title: 'Check the roadmap', desc: 'Your feature might already be planned.', href: '/roadmap' },
-                { title: 'Read the changelog', desc: 'Your bug might already be fixed.', href: '/changelog' },
-              ].map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="flex items-start gap-3 p-4 bg-surface border border-ash rounded-xl hover:border-ash-light hover:shadow-sm transition-all duration-200 group"
-                >
+              {[{ title: 'Read the announcements', desc: 'Your bug might already be fixed.', href: '/announcements' }].map((item) => (
+                <a key={item.href} href={item.href}
+                  className="flex items-start gap-3 p-4 bg-surface border border-ash rounded-xl hover:border-ash-light hover:shadow-sm transition-all duration-200 group">
                   <div>
                     <div className="font-medium text-midnight text-sm group-hover:text-violet transition-colors">{item.title} →</div>
                     <div className="text-wolf-gray text-xs mt-0.5">{item.desc}</div>
@@ -200,7 +224,7 @@ export default function SupportPage() {
   );
 }
 
-function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
+function FormField({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1.5">
       <label className="text-xs font-semibold text-midnight uppercase tracking-wide">{label}</label>
@@ -211,9 +235,5 @@ function Field({ label, error, children }: { label: string; error?: string; chil
 }
 
 function inputCls(hasError: boolean) {
-  return `w-full px-4 py-3 bg-surface border rounded-xl text-sm text-midnight placeholder-wolf-gray focus:outline-none transition-colors ${
-    hasError
-      ? 'border-error focus:border-error'
-      : 'border-ash focus:border-violet'
-  }`;
+  return `w-full px-4 py-3 bg-surface border rounded-xl text-sm text-midnight placeholder-wolf-gray focus:outline-none transition-colors ${hasError ? 'border-error focus:border-error' : 'border-ash focus:border-violet'}`;
 }

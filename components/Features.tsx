@@ -1,45 +1,77 @@
-import { BudgetIcon, TransactionIcon, WalletIcon, GoalIcon, DebtIcon, SubscriptionIcon, CalendarIcon, ProfileIcon } from './Icons';
+import { BudgetIcon, TransactionIcon, WalletIcon, GoalIcon, DebtIcon, SubscriptionIcon, CalendarIcon, ProfileIcon, CalendarIcon as TaskIcon } from './Icons';
 
-const FEATURES = [
+const SCREENSHOTS = [
   {
     Icon: BudgetIcon,
     title: 'Monthly Budgets',
-    desc: 'Plan your income and expenses before the month begins. Group categories your way and watch actuals fill in as you spend.',
+    desc: 'Plan income and expenses before the month begins.',
+    gradient: 'from-violet/30 to-violet/10',
+    aspect: 'aspect-[16/9]',
+    device: 'Desktop',
+    image: '/screenshots/budget.png',
   },
   {
     Icon: TransactionIcon,
     title: 'Inflow & Outflow',
-    desc: 'Track every peso in and out. Log salary, freelance income, and everyday expenses against your budget.',
+    desc: 'Track every peso in and out against your budget.',
+    gradient: 'from-blue-500/20 to-blue-400/10',
+    aspect: 'aspect-[3/4]',
+    device: 'Mobile',
+    image: '/screenshots/transactions.png',
   },
   {
     Icon: WalletIcon,
     title: 'Savings Wallets',
-    desc: 'Create named buckets for the things that matter — emergency fund, travel, a new laptop. Full history per wallet.',
+    desc: 'Named buckets for everything that matters — emergency, travel, gadgets.',
+    gradient: 'from-success/20 to-success/8',
+    aspect: 'aspect-[4/3]',
+    device: 'Tablet',
+    image: '/screenshots/savings.png',
   },
   {
     Icon: GoalIcon,
     title: 'Financial Goals',
-    desc: 'Set a target amount and a deadline. Track your monthly contribution progress toward big milestones.',
+    desc: 'Set targets and deadlines. Watch your monthly contributions add up.',
+    gradient: 'from-orange-400/20 to-orange-300/8',
+    aspect: 'aspect-[3/4]',
+    device: 'Mobile',
+    image: '/screenshots/goals.png',
+  },
+  {
+    Icon: TaskIcon,
+    title: 'Tasks',
+    desc: 'Manage your to-dos alongside your finances — all in one app.',
+    gradient: 'from-indigo-500/20 to-indigo-400/8',
+    aspect: 'aspect-[16/9]',
+    device: 'Desktop',
+    image: '/screenshots/tasks.png',
   },
   {
     Icon: DebtIcon,
     title: 'Debts & Receivables',
-    desc: 'Know exactly what you owe and what others owe you. Track repayments and see obligations in both directions.',
+    desc: 'Know exactly what you owe and what others owe you.',
+    gradient: 'from-red-400/20 to-red-300/8',
+    aspect: 'aspect-[4/3]',
+    device: 'Tablet',
+    image: '/screenshots/debts.png',
   },
   {
     Icon: SubscriptionIcon,
     title: 'Subscriptions',
-    desc: 'All your recurring subscriptions in one list — with next billing dates and monthly cost equivalents.',
+    desc: 'All recurring subscriptions in one list with next billing dates.',
+    gradient: 'from-pink-400/20 to-pink-300/8',
+    aspect: 'aspect-[16/9]',
+    device: 'Desktop',
+    image: '/screenshots/subscriptions.png',
   },
   {
     Icon: CalendarIcon,
     title: 'Planned Payments',
-    desc: 'Schedule upcoming bills before they arrive. Electricity, internet, insurance — never be caught off guard.',
-  },
-  {
-    Icon: ProfileIcon,
-    title: 'Budget Profiles',
-    desc: 'Run separate budget plans side by side. Keep personal and freelance finances in their own spaces.',
+    desc: 'Schedule upcoming bills so you\'re never caught off guard.',
+    gradient: 'from-teal-500/20 to-teal-400/8',
+    aspect: 'aspect-[3/4]',
+    device: 'Mobile',
+    image: '/screenshots/planned.png',
   },
 ];
 
@@ -57,17 +89,26 @@ export default function Features() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {FEATURES.map((f) => (
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-5">
+          {SCREENSHOTS.map((item) => (
             <div
-              key={f.title}
-              className="bg-surface border border-ash rounded-2xl p-6 hover:border-ash-light hover:shadow-md transition-all duration-200 group"
+              key={item.title}
+              className="break-inside-avoid mb-5 rounded-2xl overflow-hidden border border-ash bg-surface group"
             >
-              <div className="w-10 h-10 bg-snow rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
-                <f.Icon className="w-5 h-5 text-midnight" />
+              <div className={`relative ${item.aspect} bg-gradient-to-br ${item.gradient} overflow-hidden`}>
+                <div className="absolute inset-0 flex items-center justify-center opacity-30">
+                  <item.Icon className="w-16 h-16 text-midnight" />
+                </div>
+                <div className="absolute bottom-3 left-3">
+                  <span className="text-xs font-mono text-midnight/40 bg-midnight/8 px-2 py-1 rounded-md">
+                    {item.device} screenshot
+                  </span>
+                </div>
               </div>
-              <h3 className="font-semibold text-midnight text-sm mb-2">{f.title}</h3>
-              <p className="text-wolf-gray text-sm leading-relaxed">{f.desc}</p>
+              <div className="p-5">
+                <h3 className="font-semibold text-midnight text-sm mb-1.5">{item.title}</h3>
+                <p className="text-wolf-gray text-xs leading-relaxed">{item.desc}</p>
+              </div>
             </div>
           ))}
         </div>

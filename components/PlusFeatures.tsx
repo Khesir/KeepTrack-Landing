@@ -54,12 +54,9 @@ export default function PlusFeatures() {
               Plus gives you cloud sync and AI-powered tools that turn your raw spending data into clear, actionable insight — all for less than a coffee a month.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link
-                href="/pricing"
-                className="px-6 py-3 bg-violet text-white font-semibold text-sm rounded-xl hover:bg-violet-dark transition-all duration-200 hover:shadow-lg hover:shadow-violet/30 text-center"
-              >
-                Get Plus — ₱99/mo
-              </Link>
+              <span className="px-6 py-3 bg-violet/20 text-violet/50 font-semibold text-sm rounded-xl cursor-not-allowed select-none text-center">
+                Coming Soon
+              </span>
               <Link
                 href="/pricing"
                 className="px-6 py-3 border border-white/15 text-snow/60 font-medium text-sm rounded-xl hover:bg-white/8 hover:text-snow transition-all duration-200 text-center"

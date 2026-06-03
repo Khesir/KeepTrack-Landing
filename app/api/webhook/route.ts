@@ -1,15 +1,14 @@
+import crypto from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
-import { stripe } from '@/lib/stripe';
-import Stripe from 'stripe';
 
 export const dynamic = 'force-dynamic';
 
 const BACKEND_URL = process.env.BACKEND_URL;
-const WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET!;
+const WEBHOOK_SECRET = process.env.LEMONSQUEEZY_WEBHOOK_SECRET!;
 
 async function notifyBackend(email: string, status: 'active' | 'cancelled') {
   if (!BACKEND_URL) return;
-  await fetch(`${BACKEND_URL}/api/v1/internal/subscription`, {
+  await fetch(`${BACKEND_URL}/api/v1/users/internal/subscription`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -20,37 +19,39 @@ async function notifyBackend(email: string, status: 'active' | 'cancelled') {
 }
 
 export async function POST(req: NextRequest) {
-  const body = await req.text();
-  const sig = req.headers.get('stripe-signature');
+  const rawBody = await req.text();
+  const signature = req.headers.get('x-signature');
 
-  let event: Stripe.Event;
-  try {
-    event = stripe.webhooks.constructEvent(body, sig!, WEBHOOK_SECRET);
-  } catch (err: any) {
-    return NextResponse.json({ error: `Webhook error: ${err.message}` }, { status: 400 });
+  if (!signature) {
+    return NextResponse.json({ error: 'Missing signature.' }, { status: 400 });
+  }
+
+  const hmac = crypto.createHmac('sha256', WEBHOOK_SECRET);
+  const digest = hmac.update(rawBody).digest('hex');
+
+  if (digest !== signature) {
+    return NextResponse.json({ error: 'Invalid signature.' }, { status: 400 });
   }
 
   try {
-    switch (event.type) {
-      case 'checkout.session.completed': {
-        const session = event.data.object as Stripe.Checkout.Session;
-        const email = session.customer_email ?? (session.metadata?.email as string);
-        if (email) await notifyBackend(email, 'active');
+    const event = JSON.parse(rawBody);
+    const eventName: string = event.meta?.event_name;
+    const email: string =
+      event.meta?.custom_data?.user_email ?? event.data?.attributes?.user_email;
+
+    if (!email) {
+      console.warn('[webhook] No email found in event', eventName);
+      return NextResponse.json({ received: true });
+    }
+
+    switch (eventName) {
+      case 'subscription_created':
+        await notifyBackend(email, 'active');
         break;
-      }
-      case 'customer.subscription.deleted': {
-        const sub = event.data.object as Stripe.Subscription;
-        const customer = await stripe.customers.retrieve(sub.customer as string) as Stripe.Customer;
-        if (customer.email) await notifyBackend(customer.email, 'cancelled');
+      case 'subscription_cancelled':
+      case 'subscription_expired':
+        await notifyBackend(email, 'cancelled');
         break;
-      }
-      case 'customer.subscription.updated': {
-        const sub = event.data.object as Stripe.Subscription;
-        const customer = await stripe.customers.retrieve(sub.customer as string) as Stripe.Customer;
-        const status = sub.status === 'active' ? 'active' : 'cancelled';
-        if (customer.email) await notifyBackend(customer.email, status);
-        break;
-      }
     }
   } catch (err) {
     console.error('[webhook] handler error:', err);

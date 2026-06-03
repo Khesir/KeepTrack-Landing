@@ -87,12 +87,9 @@ export default function PricingCards({ compact = false }: { compact?: boolean })
             ))}
           </ul>
 
-          <Link
-            href="/pricing#checkout"
-            className="block text-center px-6 py-3 bg-violet text-white font-semibold text-sm rounded-xl hover:bg-violet-dark transition-all duration-200 hover:shadow-lg hover:shadow-violet/30"
-          >
-            Get Plus — ₱99/mo
-          </Link>
+          <span className="block text-center px-6 py-3 bg-violet/20 text-violet/50 font-semibold text-sm rounded-xl cursor-not-allowed select-none">
+            Coming Soon
+          </span>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { stripe } from '@/lib/stripe';
+import '@/lib/lemonsqueezy';
+import { createCheckout } from '@lemonsqueezy/lemonsqueezy.js';
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,25 +11,24 @@ export async function POST(req: NextRequest) {
 
     const origin = req.headers.get('origin') ?? process.env.NEXT_PUBLIC_APP_URL;
 
-    const session = await stripe.checkout.sessions.create({
-      mode: 'subscription',
-      payment_method_types: ['card'],
-      customer_email: email.trim(),
-      line_items: [
-        {
-          price: process.env.STRIPE_PLUS_PRICE_ID!,
-          quantity: 1,
+    const checkout = await createCheckout(
+      process.env.LEMONSQUEEZY_STORE_ID!,
+      process.env.LEMONSQUEEZY_VARIANT_ID!,
+      {
+        checkoutData: {
+          email: email.trim(),
+          custom: { user_email: email.trim() },
         },
-      ],
-      success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/cancel`,
-      metadata: { email: email.trim() },
-      subscription_data: {
-        metadata: { email: email.trim() },
+        productOptions: {
+          redirectUrl: `${origin}/success`,
+        },
       },
-    });
+    );
 
-    return NextResponse.json({ url: session.url });
+    const url = checkout.data?.data.attributes.url;
+    if (!url) throw new Error('Failed to create checkout session.');
+
+    return NextResponse.json({ url });
   } catch (err: any) {
     console.error('[checkout]', err);
     return NextResponse.json({ error: err.message ?? 'Checkout failed.' }, { status: 500 });
